@@ -62,7 +62,7 @@ public class WebsiteUT {
     }
     @Test
     public void testValidateWebsite(){
-        if (!Ws.validateWebsite()){
+        if (!Ws.validatePageTitles()){
             System.out.println("One of the pages have incorrect Title!") ;
             assertTrue(false);
         }
@@ -70,6 +70,52 @@ public class WebsiteUT {
             System.out.println("All the pages have correct Title!") ;
         }
     }
+@Test
+public void testGetTagNamebyID( ){
+        Ws.LoadUrl(GlobalData.getHomeUrl());
+     String Tag = Ws.getTagNamebyID(GlobalData.getPage1ID());
+    if (Tag == null){
+        System.out.println("The element was not found on the page!") ;
+        assertTrue(false);
+    }
+    else {
+        System.out.println("Tag:" +
+                Tag +" ID: "
+                + GlobalData.getPage1ID()) ;
+    }
+}
+@Test
+public void testNavigateTobyID(){
+Ws.LoadUrl(GlobalData.getHomeUrl());
+    if (Ws.NavigateToByID(GlobalData.getPage1ID(),GlobalData.getPage1Title())){
+        System.out.println("The navigation was successful!") ;
+    }
+    else{
+        System.out.println("The Navigation failed!") ;
+        assertTrue(false);
+    }
+
+}
+@Test
+    public void testValidateLinksByID(){
+    if (!Ws.validateLinksByID(GlobalData.getHomeUrl())){
+        System.out.println("One of the pages have incorrect Link on Home page!") ;
+        assertTrue(false);
+    }
+    else {
+        System.out.println("All the links are working fine on Home page!") ;
+    }
+}
+@Test
+public void testValidateAllPages(){
+       if (!Ws.validateLinksAllPages()){
+           System.out.println("One of the pages have incorrect Link on the website!") ;
+           assertTrue(false);
+       }
+       else {
+           System.out.println("All the links are working fine on the website!") ;
+       }
+       }
 
     @AfterClass
     public static void cleanup(){
